@@ -1,3 +1,4 @@
+cap program drop iols_ivreg2
 program define iOLS_ivreg2, rclass
 	syntax [anything] [if] [, DELta(real 1) gmm2s Robust CLuster(varlist numeric)]
 	marksample touse
