@@ -122,7 +122,7 @@ program define i2SLS_ivreg2, rclass
 	forv n=1/`nbvar' {
 		mat result[`n',1] = beta_final[1,`n']
 		mat result[`n',2] = list_std_err[`n',1]
-		mat result[`n',3] = sqrt(Sigma[`n',`n'])*`delta'
+		mat result[`n',3] = sqrt(Sigma[`n',`n'])*(1+`delta')
 	}
 	mat result[`=`nbvar'+1',1] = `nobs'
 	mat result[`=`nbvar'+2',1] = `k'
