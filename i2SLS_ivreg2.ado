@@ -107,7 +107,7 @@ program define i2SLS_ivreg2, rclass
 	mata : Pz = Z*invsym(Z'*Z)*Z'
 	mata : Sigma_hat = st_matrix("Sigma")
 	mata : Sigma_0 = (X'*Pz*X)*Sigma_hat*(X'*Pz*X)
-	mata : invXpPzIWX = invsym(X'*0.5*(Pz*IW+IW*Pz)*X)
+	mata : invXpPzIWX = invsym(X'*(1/(1+`delta'))*(Pz*IW+IW*Pz)*X)
 	mata : Sigma_tild = invXpPzIWX*Sigma_0*invXpPzIWX
 	mata : list_Variance = diagonal(Sigma_tild)
 	mata : list_std_err = sqrt(list_Variance)
@@ -132,4 +132,3 @@ program define i2SLS_ivreg2, rclass
 	mat list result
 	restore
 end
-* changed delta in std err approx + in line 62 for c_hat.
