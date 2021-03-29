@@ -1,0 +1,8 @@
+********************************************** unique.pkg
+v 1
+d iOLS_ivreg2
+d Program to run small sample iOLS with instrumental variables
+d Distribution-Date: 22 March 2021
+f iOLS_ivreg2.ado
+
+
