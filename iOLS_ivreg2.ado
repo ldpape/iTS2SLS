@@ -1,4 +1,3 @@
-cap program drop iols_ivreg2
 program define iOLS_ivreg2, rclass
 	syntax [anything] [if] [, DELta(real 1) gmm2s Robust CLuster(varlist numeric)]
 	marksample touse
@@ -45,7 +44,7 @@ program define iOLS_ivreg2, rclass
 	local eps = 1000	
 	*** ItÃ©rations iOLS
 	_dots 0
-	while (`k' < 1000 & `eps' > 1e-3) {
+	while (`k' < 1000 & `eps' > 1e-6) {
 		matrix beta_initial = beta_new
 		* Nouveaux beta
 		tempvar xb_hat
@@ -60,7 +59,7 @@ program define iOLS_ivreg2, rclass
 		scalar `phi_hat' = log(`r(mean)')
 		* Calcul de c_hat
 		tempvar temp2
-		gen `temp2' = log(`depvar' + exp(`phi_hat' + (`xb_hat' - `cste_hat'))) - (`phi_hat' + (`xb_hat' - `cste_hat'))
+		gen `temp2' = log(`depvar' + `delta'*exp(`phi_hat' + (`xb_hat' - `cste_hat'))) - (`phi_hat' + (`xb_hat' - `cste_hat'))
 		quietly sum `temp2' if e(sample)
 		tempname c_hat
 		scalar `c_hat' = `r(mean)'
@@ -123,7 +122,7 @@ program define iOLS_ivreg2, rclass
 	forv n=1/`nbvar' {
 		mat result[`n',1] = beta_final[1,`n']
 		mat result[`n',2] = list_std_err[`n',1]
-		mat result[`n',3] = sqrt(Sigma[`n',`n'])*2
+		mat result[`n',3] = sqrt(Sigma[`n',`n'])*`delta'
 	}
 	mat result[`=`nbvar'+1',1] = `nobs'
 	mat result[`=`nbvar'+2',1] = `k'
@@ -133,3 +132,4 @@ program define iOLS_ivreg2, rclass
 	mat list result
 	restore
 end
+* changed delta in std err approx + in line 62 for c_hat.
