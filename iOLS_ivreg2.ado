@@ -1,4 +1,4 @@
-program define iols_ivreg2, rclass
+program define iOLS_ivreg2, rclass
 	syntax [anything] [if] [, gmm2s Robust CLuster(varlist numeric)]
 	marksample touse
 	
