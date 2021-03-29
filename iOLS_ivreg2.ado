@@ -45,7 +45,7 @@ program define iOLS_ivreg2, rclass
 	local eps = 1000	
 	*** ItÃ©rations iOLS
 	_dots 0
-	while (`k' < 1000 & `eps' > 1e-6) {
+	while (`k' < 1000 & `eps' > 1e-3) {
 		matrix beta_initial = beta_new
 		* Nouveaux beta
 		tempvar xb_hat
