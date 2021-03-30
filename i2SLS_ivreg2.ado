@@ -1,4 +1,4 @@
-program define i2SLS_ivreg2, rclass
+program define i2SLS_ivreg2, eclass
 	syntax [anything] [if] [, DELta(real 1) gmm2s Robust CLuster(varlist numeric)]
 	marksample touse
 	
@@ -112,23 +112,34 @@ program define i2SLS_ivreg2, rclass
 	mata : list_Variance = diagonal(Sigma_tild)
 	mata : list_std_err = sqrt(list_Variance)
 	mata : st_matrix("list_std_err", list_std_err)
-
+   mata: st_matrix("Sigma_tild", Sigma_tild) // used in practice
 	*** Stocker les rÃ©sultats dans une matrice
 	local names : colnames e(b)
 	local nbvar : word count `names'
-	mat result=J(`=`nbvar'+5',3,.) //Defining empty matrix
-	mat rownames result = `names' "nobs" "niter" "criteria" "FStatWeakId" "And.Rub.FStat"
-	mat colnames result = "Beta" "Std.Er." "StdErApprox"
-	forv n=1/`nbvar' {
-		mat result[`n',1] = beta_final[1,`n']
-		mat result[`n',2] = list_std_err[`n',1]
-		mat result[`n',3] = sqrt(Sigma[`n',`n'])*(1+`delta')
-	}
-	mat result[`=`nbvar'+1',1] = `nobs'
-	mat result[`=`nbvar'+2',1] = `k'
-	mat result[`=`nbvar'+3',1] = `eps'
-	mat result[`=`nbvar'+4',1] = e(widstat)
-	mat result[`=`nbvar'+5',1] = e(arf)
-	mat list result
-	restore
+	*mat result=J(`=`nbvar'+5',3,.) //Defining empty matrix
+	*mat rownames result = `names' "nobs" "niter" "criteria" "FStatWeakId" "And.Rub.FStat"
+	*mat colnames result = "Beta" "Std.Er." "StdErApprox"
+	*forv n=1/`nbvar' {
+	*	mat result[`n',1] = beta_final[1,`n']
+	*	mat result[`n',2] = list_std_err[`n',1]
+	*	mat result[`n',3] = sqrt(Sigma[`n',`n'])*(1+`delta')
+	*}
+	*mat result[`=`nbvar'+1',1] = `nobs'
+	*mat result[`=`nbvar'+2',1] = `k'
+	*mat result[`=`nbvar'+3',1] = `eps'
+	*mat result[`=`nbvar'+4',1] = e(widstat)
+	*mat result[`=`nbvar'+5',1] = e(arf)
+	*mat list result
+		mat rownames Sigma_tild = `names' 
+    mat colnames Sigma_tild = `names' 
+    ereturn post beta_final Sigma_tild , obs(`=r(N)') depname(`depvar') esample(`touse')  dof(`=r(df r)') 
+	restore 
+ereturn scalar delta = `delta'
+ereturn  scalar eps =   `eps'
+ereturn  scalar niter =  `k'
+ereturn widstat = e(widstat)
+ereturn arf = e(arf)
+ereturn local cmd "i2SLS"
+ereturn local vcetype `option'
+ereturn display
 end
