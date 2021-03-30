@@ -15,7 +15,7 @@
 {title:Title}
 
 {p2colset 5 18 20 2}{...}
-{p2col :{cmd:iOLS_ivreg2} {hline 2}}Iterated Two Stage Least Squares i2SLS using ivreg2 {p_end}
+{p2col :{cmd:iOLS_ivreg2} {hline 2}} Iterated Two Stage Least Squares i2SLS using ivreg2 {p_end}
 {p2colreset}{...}
 
 {marker syntax}{...}
@@ -40,8 +40,9 @@ may be {opt r:obust} (default) or {opt cl:uster} {help fvvarlist} (allowing two-
 {marker description}{...}
 {title:Description}
 
-{pstd}{cmd:iOLS_OLS} iterated Ordinary Least Squares,
-as described by {browse "https://sites.google.com/site/louisdanielpape/":Bellego, Benatia, and Pape (2021)}.
+{pstd} {cmd: i2SLS_ivreg2} estimates iOLS_delta, a solution to the problem of the log of zero.  This method relies on running the "regress" function iteratively.
+This provides the reader with the final OLS estimates and allows the use the post-estimation commands available under regress (using Y_tilde = log(Y + delta*exp(xb))) as a 
+dependent variable.  The benefit of using "regress" comes at the cost of limited capacity to deal with many fixed effects. In such a case, iOLS_hdfe may be more appropriate.
 
 {pstd}This package:
 
@@ -78,9 +79,9 @@ as described by {browse "https://sites.google.com/site/louisdanielpape/":Bellego
 {marker contact}{...}
 {title:Authors}
 
-{pstd}Louis Pape {break}
+{pstd} Author {break}
 CREST {break}
-Email: {browse "mailto:louis.pape@polytechnique.edu":louis.pape@polytechnique.edu}
+Email: {browse "mailto:author@author.edu":author@email.edu}
 {p_end}
 
 
