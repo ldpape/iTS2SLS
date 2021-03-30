@@ -137,8 +137,8 @@ program define i2SLS_ivreg2, eclass
 ereturn scalar delta = `delta'
 ereturn  scalar eps =   `eps'
 ereturn  scalar niter =  `k'
-ereturn widstat = e(widstat)
-ereturn arf = e(arf)
+ereturn scalar widstat = e(widstat)
+ereturn scalar arf = e(arf)
 ereturn local cmd "i2SLS"
 ereturn local vcetype `option'
 ereturn display
