@@ -30,10 +30,10 @@ program define i2SLS_ivreg2, eclass
     gettoken equalsign instr_temp : instr_temp , p("=")
 	gettoken instr instr_temp : instr_temp, p(")")
 	
-	di `"`depvar'"'
-	di `"`indepvar'"'
-	di `"`endog'"'
-	di `"`instr'"'
+	*di `"`depvar'"'
+	*di `"`indepvar'"'
+	*di `"`endog'"'
+	*di `"`instr'"'
 	
 	*** Initialisation de la boucle
 	tempvar y_tild 
