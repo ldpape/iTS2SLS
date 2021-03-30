@@ -143,7 +143,7 @@ ivpois wage age children, endog(education) exog(married)
 {phang2}{cmd:. cap drop *temp  }{p_end}
 {phang2}{cmd:. end  }{p_end}
 
-{phang2}{cmd:. bootstrap lambda = _b[rhs_temp] , reps(50): iOLS_boostrap  }{p_end}
+{phang2}{cmd:. bootstrap lambda = _b[rhs_temp] , reps(50): i2SLS_bootstrap  }{p_end}
 {phang2}{cmd:. test lambda==1  }{p_end}
 {hline}
 
