@@ -109,7 +109,6 @@ Available at SSRN: https://ssrn.com/abstract=3444996
 {phang2}{cmd:. i2SLS_ivreg2 wage age children (education = married) , delta(1000) robust  }{p_end}
 {phang2}{cmd:. ivpois wage age children, endog(education) exog(married) }{p_end}
 
-{phang2}{cmd:. i2SLS_ivreg2 wage age children (education = married) , delta(1) robust }{p_end}
 {phang2}{cmd:. cap program drop i2SLS_bootstrap  }{p_end}
 {phang2}{cmd:. program i2SLS_bootstrap, rclass  }{p_end}
 {phang2}{cmd:. i2SLS_ivreg2 wage age children (education = married) , delta(1) robust  }{p_end}
