@@ -78,16 +78,19 @@ dependent variable.  The benefit of using "ivreg2" comes at the cost of limited 
 {marker contact}{...}
 {title:Authors}
 
-{pstd} Author {break}
-CREST {break}
-Email: {browse "mailto:author@author.edu":author@email.edu}
+{pstd} Christophe Bellego, David Benatia, Louis Pape {break}
+CREST - ENSAE - HEC Montréal - Ecole Polytechnique {break}
+Contact: {browse "mailto:louis.pape@polytechnique.edu":louis.pape@polytechnique.edu}
 {p_end}
+
 
 {marker citation}{...}
 {title:Citation}
 
 {pstd}
-Citation to be defined. 
+Bellégo Christophe, Benatia David, and Pape Louis-Daniel, Dealing with Logs and Zeros in Regression Models (2019).
+Série des Documents de Travail n° 2019-13.
+Available at SSRN: https://ssrn.com/abstract=3444996
 
 
 {marker examples}{...}
