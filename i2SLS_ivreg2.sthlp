@@ -135,7 +135,36 @@ Available at SSRN: https://ssrn.com/abstract=3444996
 {phang2}{cmd:. test lambda==1  }{p_end}
 {hline}
 
-{pstd} Third, you can convert your results into latex using esttab where "eps" provides the convergence criteria:
+{pstd} Third, we show how to test for the pattern of zeros with IV-Poisson.
+{p_end}
+{hline}
+
+{phang2}{cmd:.  cap program drop IVPoisson_boostrap  }{p_end}
+{phang2}{cmd:.  program IVPoisson_boostrap, rclass  }{p_end}
+{phang2}{cmd:.  * estimate the model  }{p_end}
+{phang2}{cmd:.  ivpois wage age children, endog(education) exog(married)  }{p_end}
+{phang2}{cmd:.  * lhs of test   }{p_end}
+{phang2}{cmd:.  predict xb_temp, xb  }{p_end}
+{phang2}{cmd:.  gen u_hat_temp = wage*exp(-xb_temp)  }{p_end}
+{phang2}{cmd:.  egen mean_u_temp = mean(u_hat_temp)  }{p_end}
+{phang2}{cmd:. gen lhs_temp = u_hat_temp*exp(-xb_temp)  // obtain the correct residuals  }{p_end}
+{phang2}{cmd:.  * rhs of test  }{p_end}
+{phang2}{cmd:.  logit employment married children age  // use the instrument instead of the endogenous variable  }{p_end}
+{phang2}{cmd:.  predict p_hat_temp, pr  }{p_end}
+{phang2}{cmd:.  gen rhs_temp = (mean_u_temp)/p_hat_temp  }{p_end}
+{phang2}{cmd:.  * run the test  }{p_end}
+{phang2}{cmd:.  reg lhs_temp rhs_temp if employment, nocons   }{p_end}
+{phang2}{cmd:.  matrix b = e(b)  }{p_end}
+{phang2}{cmd:.  ereturn post b  }{p_end}
+{phang2}{cmd:.  * drop created variables  }{p_end}
+{phang2}{cmd:.  cap drop *temp  }{p_end}
+{phang2}{cmd:.  end  }{p_end}
+
+bootstrap lambda = _b[rhs_temp] , reps(50): IVPoisson_boostrap
+test lambda==1
+
+
+{pstd} Fourth, you can convert your results into latex using esttab where "eps" provides the convergence criteria:
 {p_end}
 {hline}
 {phang2}{cmd:. eststo clear}{p_end}
