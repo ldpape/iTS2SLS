@@ -1,5 +1,5 @@
 program define i2SLS_ivreg2, eclass
-	syntax [anything] [if] [, DELta(real 1) gmm2s Robust CLuster(varlist numeric)]
+	syntax [anything] [if]  [in] [aweight pweight fweight iweight]  [, DELta(real 1) gmm2s Robust CLuster(varlist numeric)]
 	marksample touse
 	
 	if "`gmm2s'" !="" {
@@ -38,7 +38,7 @@ program define i2SLS_ivreg2, eclass
 	*** Initialisation de la boucle
 	tempvar y_tild 
 	gen `y_tild' = log(`depvar' + 1)
-	quietly ivreg2 `y_tild' `indepvar' (`endog' = `instr') if `touse', `option'
+	quietly ivreg2 `y_tild' `indepvar' (`endog' = `instr') [`weight'`exp'] if `touse', `option'
 	matrix beta_new = e(b)
 	local k = 0
 	local eps = 1000	
@@ -54,18 +54,18 @@ program define i2SLS_ivreg2, eclass
 		* Calcul de phi_hat
 		tempvar temp1
 		gen `temp1' = `depvar' * exp(-(`xb_hat' - `cste_hat'))
-		quietly sum `temp1' if e(sample)
+		quietly sum `temp1' [`weight'`exp'] if e(sample)
 		tempname phi_hat
 		scalar `phi_hat' = log(`r(mean)')
 		* Calcul de c_hat
 		tempvar temp2
 		gen `temp2' = log(`depvar' + `delta'*exp(`phi_hat' + (`xb_hat' - `cste_hat'))) - (`phi_hat' + (`xb_hat' - `cste_hat'))
-		quietly sum `temp2' if e(sample)
+		quietly sum `temp2' [`weight'`exp'] if e(sample)
 		tempname c_hat
 		scalar `c_hat' = `r(mean)'
 		* Update d'un nouveau y_tild et regression avec le nouvel y_tild
 		quietly replace `y_tild' = log(`depvar' + `delta' * exp(`xb_hat')) - `c_hat'
-		quietly ivreg2 `y_tild' `indepvar' (`endog' = `instr') if `touse', `option' ffirst saverf
+		quietly ivreg2 `y_tild' `indepvar' (`endog' = `instr')  if `touse' [`weight'`exp'] , `option' ffirst saverf
 		matrix beta_new = e(b)
 		* DiffÃ©rence entre les anciens betas et les nouveaux betas
 		matrix diff = beta_initial - beta_new
@@ -86,7 +86,7 @@ program define i2SLS_ivreg2, eclass
 	tempvar ui
 	gen `ui' = exp(`y_tild' + `c_hat' - `xb_hat') - `delta'
 	matrix beta_final = e(b)
-	quietly sum if e(sample)
+	quietly sum [`weight'`exp'] if e(sample)
 	tempname nobs
 	scalar `nobs' = r(N)
 	* Calcul de Sigma_0, de I-W, et de Sigma_tild
