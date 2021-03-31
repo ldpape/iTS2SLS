@@ -64,9 +64,9 @@ dependent variable.  The benefit of using "ivreg2" comes at the cost of limited 
 {marker caveats}{...}
 {title:Caveats}
 
-{pstd} Convergence is decided based on coefficients (sum of squared coefficients < 1e-6) and not on the modulus of the contraction mapping.
+{pstd} Convergence is decided based on coefficients (sum of squared coefficients < 1e-6) and not on the modulus of the contraction mapping. {p_end}
 
-{pstd} The {help reg postestimation##predict:predict}, {help test}, and {help margins} postestimation commands are available after {cmd:i2SLS_ivreg2}.
+{pstd} The {help reg postestimation##predict:predict}, {help test}, and {help margins} postestimation commands are available after {cmd:i2SLS_ivreg2}. {p_end}
 
 {marker contact}{...}
 {title:Authors}
