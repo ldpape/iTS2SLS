@@ -39,20 +39,20 @@ may be classical (assuming homoskedasticity), {opt r:obust}, or {opt cl:uster} (
 {marker description}{...}
 {title:Description}
 
-{pstd} {cmd: i2SLS_ivreg2} estimates iOLS_delta, a solution to the problem of the log of zero.  This method relies on running the "regress" function iteratively.
-This provides the reader with the final OLS estimates and allows the use the post-estimation commands available under regress (using Y_tilde = log(Y + delta*exp(xb))) as a 
-dependent variable.  The benefit of using "regress" comes at the cost of limited capacity to deal with many fixed effects. In such a case, iOLS_hdfe may be more appropriate.
+{pstd}{cmd:iOLS_ivreg2} iterated Two Stage Least Squares (i2SLS) with delta, as described by {browse "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3444996":Bellego, Benatia, and Pape (2021)}.
 
 {pstd}This package:
 
-{pmore} 1. relies on Stata's ivreg2 procedure for estimation.{p_end}
+{pmore} 1. relies on Stata's ivreg2 routine for estimation.{p_end}
 
-{pmore} 2. assumes the iOLS exogeneity condition with instrument Z E(Z'log(delta+U))=constant  {p_end}
+{pmore} 2. assumes the iOLS exogeneity condition with instrument Z, E(Z'log(delta+U))=constant  {p_end}
 
 
 {title:Background}
 
-{pstd} i2SLS_delta is a solution to the problem of the log of zero with endogenous variables.
+{pstd} {cmd: i2SLS_ivreg2} estimates iOLS_delta, a solution to the problem of the log of zero, in the context of an endogenous regressor.  This method relies on running the "ivreg2" function iteratively.
+This provides the reader with the final 2SLS estimates and allows the use the post-estimation commands available under ivreg2 (using Y_tilde = log(Y + delta*exp(xb))) as a 
+dependent variable.  The benefit of using "ivreg2" comes at the cost of limited capacity to deal with many fixed effects. In such a case, i2SLS_hdfe may be more appropriate.
 
 {marker absvar}{...}
 {title:Syntax for absorbed variables}
@@ -72,7 +72,7 @@ dependent variable.  The benefit of using "regress" comes at the cost of limited
 {pstd} Convergence is decided based on coefficients (sum of squared coefficients < 1e-6) and not on the modulus of the contraction mapping.
 
 
-{pstd}The {help reg postestimation##predict:predict}, {help test}, and {help margins} postestimation commands are available after {cmd:iOLS_OLS}.
+{pstd}The {help reg postestimation##predict:predict}, {help test}, and {help margins} postestimation commands are available after {cmd:i2SLS_ivreg2}.
 
 
 {marker contact}{...}
@@ -82,9 +82,6 @@ dependent variable.  The benefit of using "regress" comes at the cost of limited
 CREST {break}
 Email: {browse "mailto:author@author.edu":author@email.edu}
 {p_end}
-
-
-
 
 {marker citation}{...}
 {title:Citation}
