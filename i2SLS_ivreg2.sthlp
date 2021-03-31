@@ -41,7 +41,8 @@ may be classical (assuming homoskedasticity), {opt r:obust}, or {opt cl:uster} (
 {pstd}{cmd:i2SLS_ivreg2} iterated Two Stage Least Squares (i2SLS) with delta, as described by {browse "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3444996":Bellego, Benatia, and Pape (2021)}.
 
 {pstd}This package:
-{pmore} 1. relies on Stata's ivreg2 routine for estimation.{p_end}
+
+{pmore} 1. relies on Stata's ivreg2 routine for estimation. {p_end}
 {pmore} 2. assumes the iOLS exogeneity condition with instrument Z, E(Z'log(delta+U))=constant.  {p_end}
 
 {title:Background}
