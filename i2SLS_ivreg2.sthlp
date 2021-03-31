@@ -2,20 +2,20 @@
 {* *! version 1.0 22march2021}{...}
 {vieweralsosee "[R] poisson" "help poisson"}{...}
 {vieweralsosee "" "--"}{...}
-{vieweralsosee "reghdfe" "help reghdfe"}{...}
+{vieweralsosee "ivreghdfe" "help reghdfe"}{...}
 {vieweralsosee "ppml" "help ppml"}{...}
 {vieweralsosee "ppmlhdfe" "help ppmlhdfe"}{...}
-{viewerjumpto "Syntax" "iOLS_ivreg2##syntax"}{...}
-{viewerjumpto "Description" "iOLS_ivreg2##description"}{...}
-{viewerjumpto "Citation" "iOLS_ivreg2##citation"}{...}
-{viewerjumpto "Authors" "iOLS_ivreg2##contact"}{...}
-{viewerjumpto "Examples" "iOLS_ivreg2##examples"}{...}
-{viewerjumpto "Description" "iOLS_ivreg2##Testing"}{...}
-{viewerjumpto "Stored results" "iOLS_ivreg2##results"}{...}
+{viewerjumpto "Syntax" "i2SLS_ivreg2##syntax"}{...}
+{viewerjumpto "Description" "i2SLS_ivreg2##description"}{...}
+{viewerjumpto "Citation" "i2SLS_ivreg2##citation"}{...}
+{viewerjumpto "Authors" "i2SLS_ivreg2##contact"}{...}
+{viewerjumpto "Examples" "i2SLS_ivreg2##examples"}{...}
+{viewerjumpto "Description" "i2SLS_ivreg2##Testing"}{...}
+{viewerjumpto "Stored results" "i2SLS_ivreg2##results"}{...}
 {title:Title}
 
 {p2colset 5 18 20 2}{...}
-{p2col :{cmd:iOLS_ivreg2} {hline 2}}Iterated Two Stage Least Squares (i2SLS) with delta {p_end}
+{p2col :{cmd:i2SLS_ivreg2} {hline 2}}Iterated Two Stage Least Squares (i2SLS) with delta {p_end}
 {p2colreset}{...}
 
 {marker syntax}{...}
@@ -23,7 +23,7 @@
 
 {p 8 15 2} {cmd:i2SLS_ivreg2}
 {depvar} [{indepvars}]
-{ifin} {it:{weight}} {cmd:,} [{help iOLS_ivreg2##options:options}] {p_end}
+{ifin} {it:{weight}} {cmd:,} [{help i2SLS_ivreg2##options:options}] {p_end}
 
 
 {marker opt_summary}{...}
@@ -31,15 +31,15 @@
 {synopthdr}
 {synoptline}
 {syntab: Standard Errors: Classical/Robust/Clustered}
-{synopt:{opt vce}{cmd:(}{help iOLS_ivreg2##opt_vce:vcetype}{cmd:)}}{it:vcetype}
+{synopt:{opt vce}{cmd:(}{help i2SLS_ivreg2##opt_vce:vcetype}{cmd:)}}{it:vcetype}
 may be classical (assuming homoskedasticity), {opt r:obust}, or {opt cl:uster} (allowing two- and multi-way clustering){p_end}
 {syntab: Delta}
-{synopt:{opt delta}{cmd:(}{help iOLS_ivreg2##opt_vce:delta}{cmd:)}}{it:delta} is any strictly positive constant. {p_end}
+{synopt:{opt delta}{cmd:(}{help i2SLS_ivreg2##opt_vce:delta}{cmd:)}}{it:delta} is any strictly positive constant. {p_end}
 
 {marker description}{...}
 {title:Description}
 
-{pstd}{cmd:iOLS_ivreg2} iterated Two Stage Least Squares (i2SLS) with delta, as described by {browse "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3444996":Bellego, Benatia, and Pape (2021)}.
+{pstd}{cmd:i2SLS_ivreg2} iterated Two Stage Least Squares (i2SLS) with delta, as described by {browse "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3444996":Bellego, Benatia, and Pape (2021)}.
 
 {pstd}This package:
 
@@ -96,12 +96,12 @@ Available at SSRN: https://ssrn.com/abstract=3444996
 {marker examples}{...}
 {title:Examples}
 
-{pstd}First, we compare iOLS_ivreg2 with IV-Poisson (using ivpois)
+{pstd}First, we compare i2SLS_ivreg2 with IV-Poisson (using ivpois)
 {browse "http://www.haghish.com/statistics/stata-blog/stata-programming/download/ivpois.html":ivpois help file}.
 {p_end}
 {hline}
 {phang2}{cmd:. use "http://www.stata-press.com/data/r14/airline"}{p_end}
-{phang2}{cmd:. iOLS_ivreg2 injuries (XYZowned=n) , delta(1) vce(robust)}{p_end}
+{phang2}{cmd:. i2SLS_ivreg2 injuries (XYZowned=n) , delta(1) vce(robust)}{p_end}
 {phang2}{cmd:. ivpois injuries (XYZowned=n)}{p_end}
 {hline}
 
@@ -160,7 +160,7 @@ ivpois wage age children, endog(education) exog(married)
 {title:Stored results}
 
 {pstd}
-{cmd:iOLS_ivreg2} stores the following in {cmd:e()}:
+{cmd:i2SLS_ivreg2} stores the following in {cmd:e()}:
 
 {synoptset 24 tabbed}{...}
 {syntab:Scalars}
