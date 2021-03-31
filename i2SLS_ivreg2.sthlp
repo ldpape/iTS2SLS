@@ -159,9 +159,9 @@ Available at SSRN: https://ssrn.com/abstract=3444996
 {phang2}{cmd:.  * drop created variables  }{p_end}
 {phang2}{cmd:.  cap drop *temp  }{p_end}
 {phang2}{cmd:.  end  }{p_end}
-
-bootstrap lambda = _b[rhs_temp] , reps(50): IVPoisson_boostrap
-test lambda==1
+ 
+{phang2}{cmd:. bootstrap lambda = _b[rhs_temp] , reps(50): IVPoisson_boostrap  }{p_end}
+{phang2}{cmd:. test lambda==1  }{p_end}
 
 
 {pstd} Fourth, you can convert your results into latex using esttab where "eps" provides the convergence criteria:
