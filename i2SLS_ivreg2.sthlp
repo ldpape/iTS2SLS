@@ -45,7 +45,7 @@ may be classical (assuming homoskedasticity), {opt r:obust}, or {opt cl:uster} (
 
 {pmore} 1. relies on Stata's ivreg2 routine for estimation.{p_end}
 
-{pmore} 2. assumes the iOLS exogeneity condition with instrument Z, E(Z'log(delta+U))=constant  {p_end}
+{pmore} 2. assumes the iOLS exogeneity condition with instrument Z, E(Z'log(delta+U))=constant.  {p_end}
 
 
 {title:Background}
