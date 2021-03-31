@@ -51,9 +51,6 @@ may be classical (assuming homoskedasticity), {opt r:obust}, or {opt cl:uster} (
 This provides the reader with the final 2SLS estimates and allows the use the post-estimation commands available under ivreg2 (using Y_tilde = log(Y + delta*exp(xb))) as a 
 dependent variable.  The benefit of using "ivreg2" comes at the cost of limited capacity to deal with many fixed effects. In such a case, i2SLS_hdfe may be more appropriate.
 
-{marker absvar}{...}
-{title:Syntax for absorbed variables}
-
 {synoptset 22}{...}
 {synopthdr: variables}
 {synoptline}
