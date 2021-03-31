@@ -34,7 +34,7 @@
 {synopt:{opt vce}{cmd:(}{help iOLS_ivreg2##opt_vce:vcetype}{cmd:)}}{it:vcetype}
 may be classical (assuming homoskedasticity), {opt r:obust}, or {opt cl:uster} (allowing two- and multi-way clustering){p_end}
 {syntab: Delta}
-{synopt:{opt}{cmd:(}{help iOLS_ivreg2##delta:delta}{cmd:)}}{it:delta} is any strictly positive constant. {p_end}
+{synopt:{opt}{cmd:(}{help iOLS_ivreg2##opt_vce:delta}{cmd:)}}{it:delta} is any strictly positive constant. {p_end}
 
 {marker description}{...}
 {title:Description}
