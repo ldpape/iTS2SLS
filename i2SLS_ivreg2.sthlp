@@ -15,27 +15,26 @@
 {title:Title}
 
 {p2colset 5 18 20 2}{...}
-{p2col :{cmd:iOLS_ivreg2} {hline 2}} Iterated Two Stage Least Squares i2SLS using ivreg2 {p_end}
+{p2col :{cmd:iOLS_ivreg2} {hline 2}}Iterated Two Stage Least Squares (i2SLS) with delta {p_end}
 {p2colreset}{...}
 
 {marker syntax}{...}
 {title:Syntax}
 
-{p 8 15 2} {cmd:iOLS_OLS}
+{p 8 15 2} {cmd:i2SLS_ivreg2}
 {depvar} [{indepvars}]
 {ifin} {it:{weight}} {cmd:,} [{help iOLS_ivreg2##options:options}] {p_end}
+
 
 {marker opt_summary}{...}
 {synoptset 22 tabbed}{...}
 {synopthdr}
 {synoptline}
-{syntab:Model}
-{syntab:SE:Robust/Cluster}
-{synopt:{opt vce}{cmd:(}{help iOLS_OLS##opt_vce:vcetype}{cmd:)}}{it:vcetype}
-may be {opt r:obust} (default) or {opt cl:uster} {help fvvarlist} (allowing two- and multi-way clustering){p_end}
-{syntab:Delta}
-{synopt:}{it:delta} is any strictly positive constant. {p_end}
-
+{syntab: Standard Errors: Classical/Robust/Clustered}
+{synopt:{opt vce}{cmd:(}{help iOLS_ivreg2##opt_vce:vcetype}{cmd:)}}{it:vcetype}
+may be classical (assuming homoskedasticity), {opt r:obust}, or {opt cl:uster} (allowing two- and multi-way clustering){p_end}
+{syntab: Delta}
+{synopt:{opt}{cmd:(}{help iOLS_ivreg2##delta:delta}{cmd:)}}{it:delta} is any strictly positive constant. {p_end}
 
 {marker description}{...}
 {title:Description}
