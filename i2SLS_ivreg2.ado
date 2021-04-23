@@ -104,7 +104,7 @@ program define i2SLS_ivreg2, eclass
 	mata : Pz = Z*invsym(Z'*Z)*Z'
 	mata : Sigma_hat = st_matrix("Sigma")
 	mata : Sigma_0 = (X'*Pz*X)*Sigma_hat*(X'*Pz*X)
-	mata : invXpPzIWX = invsym(X'*(0.5)*(Pz*IW+IW*Pz)*X)
+	mata : invXpPzIWX = invsym(X'*(2)*(Pz*IW+IW*Pz)*X)
 	mata : Sigma_tild = invXpPzIWX*Sigma_0*invXpPzIWX
 	mata : list_Variance = diagonal(Sigma_tild)
 	mata : list_std_err = sqrt(list_Variance)
