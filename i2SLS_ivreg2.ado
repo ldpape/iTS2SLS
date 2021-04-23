@@ -62,7 +62,7 @@ program define i2SLS_ivreg2, eclass
 		scalar `c_hat' = `r(mean)'
 		* Update d'un nouveau y_tild et regression avec le nouvel y_tild
 		quietly replace `y_tild' = log(`depvar' + `delta' * exp(`xb_hat')) - `c_hat'
-		quietly ivreg2 `y_tild' `indepvar' (`endog' = `instr')  if `touse' [`weight'`exp'] , `option' ffirst saverf
+		quietly ivreg2 `y_tild' `indepvar' (`endog' = `instr')  if `touse' [`weight'`exp'] , `option' // ffirst saverf
 		matrix beta_new = e(b)
 		* DiffÃ©rence entre les anciens betas et les nouveaux betas
 		matrix diff = beta_initial - beta_new
