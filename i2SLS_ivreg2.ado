@@ -12,10 +12,7 @@ program define i2SLS_ivreg2, eclass
 		local opt2 = "cluster(`cluster') "
 	}
 	local option = "`opt0'`opt1'`opt2'"
-	if "`cluster'" =="" & "`robust'" =="" {
-		di as error "Standard errors should be robust to heteroskedasticity using option robust or cluster" 
-	}
-	
+		
 	local list_var `anything'
 	* Remarque : la fct gettoken utilise directement des local variables 
 	* en 2e et 3e argument, donc pas besoin de prÃ©ciser que ce sont des
