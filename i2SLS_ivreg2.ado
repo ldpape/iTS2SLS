@@ -133,7 +133,7 @@ ereturn  scalar eps =   `eps'
 ereturn  scalar niter =  `k'
 ereturn scalar widstat = e(widstat)
 ereturn scalar arf = e(arf)
-ereturn local cmd "i2SLS"
+ereturn local cmd "i2SLS_ivreg2"
 ereturn local vcetype `option'
 ereturn display
 end
