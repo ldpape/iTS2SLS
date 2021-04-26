@@ -83,15 +83,15 @@ program define i2SLS_ivreg2, eclass
 	tempvar ui
 	gen `ui' = exp(`y_tild' + `c_hat' - `xb_hat') - `delta'
 	matrix beta_final = e(b)
-	quietly sum [`weight'`exp'] if e(sample)
-	tempname nobs
-	scalar `nobs' = r(N)
 	* Calcul de Sigma_0, de I-W, et de Sigma_tild
 	matrix Sigma = e(V)
 	tempname cste
 	gen `cste' = 1
 	tempvar ui_bis
 	gen `ui_bis' = 1 - `delta'/(`delta' + `ui')
+	quietly sum `ui_bis' [`weight'`exp'] if e(sample)
+	tempname nobs
+	scalar `nobs' = r(N)
 	local var_list `indepvar' `endog' `cste'
 	local instr_list `indepvar' `instr' `cste'
 	mata : X=.
@@ -104,7 +104,7 @@ program define i2SLS_ivreg2, eclass
 	mata : Pz = Z*invsym(Z'*Z)*Z'
 	mata : Sigma_hat = st_matrix("Sigma")
 	mata : Sigma_0 = (X'*Pz*X)*Sigma_hat*(X'*Pz*X)
-	mata : invXpPzIWX = invsym(0.5*`nobs'*X'*(Pz*IW+IW*Pz)*X)
+	mata : invXpPzIWX = invsym(0.5*X'*(Pz*IW+IW*Pz)*X)
 	mata : Sigma_tild = invXpPzIWX*Sigma_0*invXpPzIWX
    mata: st_matrix("Sigma_tild", Sigma_tild) // used in practice
 	*** Stocker les rÃ©sultats dans une matrice
