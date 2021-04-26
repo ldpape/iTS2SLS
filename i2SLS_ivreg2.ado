@@ -92,8 +92,8 @@ program define i2SLS_ivreg2, eclass
 	quietly sum `ui_bis' [`weight'`exp'] if e(sample)
 	tempname nobs
 	scalar `nobs' = r(N)
-	local var_list `indepvar' `endog' `cste'
-	local instr_list `indepvar' `instr' `cste'
+	local var_list  `endog'  `indepvar' `cste'
+	local instr_list `instr'  `indepvar' `cste'
 	mata : X=.
 	mata : Z=.
 	mata : IW=.
