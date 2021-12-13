@@ -120,7 +120,7 @@ to study the effect of cost of transportation (tcost).
 {phang2}{cmd:. * rhs of test  }{p_end}
 {phang2}{cmd:. gen temp = log(trips + delta*exp(xb_temp)) - xb_temp  }{p_end}
 {phang2}{cmd:. egen c_hat_temp = mean(temp)   }{p_end}
-{phang2}{cmd:. logit outside cbd ptn worker weekend (tcost=pt) }{p_end}
+{phang2}{cmd:. logit outside cbd ptn worker weekend pt //  use instrument instead of endogenous variable}{p_end}
 {phang2}{cmd:. predict p_hat_temp, pr  }{p_end}
 {phang2}{cmd:. gen rhs_temp = (c_hat_temp-log(delta))/p_hat_temp  }{p_end}
 {phang2}{cmd:. * run the test  }{p_end}
