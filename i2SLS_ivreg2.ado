@@ -1,3 +1,5 @@
+* 16/12 : change constant calculation to avoid a log of 0 & change eps.
+
 program define i2SLS_ivreg2, eclass
 	syntax [anything] [if]  [in] [aweight pweight fweight iweight]  [, DELta(real 1) gmm2s Robust CLuster(varlist numeric)]
 	marksample touse
@@ -46,7 +48,7 @@ program define i2SLS_ivreg2, eclass
 		* Nouveaux beta
 		tempvar xb_hat
 		predict `xb_hat', xb
-		tempname cste_hat
+/* tempname cste_hat
 		scalar `cste_hat' = _b[_cons]
 		* Calcul de phi_hat
 		tempvar temp1
@@ -59,7 +61,16 @@ program define i2SLS_ivreg2, eclass
 		gen `temp2' = log(`depvar' + `delta'*exp(`phi_hat' + (`xb_hat' - `cste_hat'))) - (`phi_hat' + (`xb_hat' - `cste_hat'))
 		quietly sum `temp2' [`weight'`exp'] if e(sample)
 		tempname c_hat
+						scalar `c_hat' = `r(mean)' */
+				* Nouveaux beta
+
+		* Calcul de c_hat
+		tempvar temp2
+		quietly	gen `temp2' = log(`depvar' + `delta'*exp(`xb_hat')) - (`xb_hat')
+		quietly sum `temp2' [`weight'`exp'] if e(sample)
+		tempname c_hat
 		scalar `c_hat' = `r(mean)'
+		
 		* Update d'un nouveau y_tild et regression avec le nouvel y_tild
 		quietly replace `y_tild' = log(`depvar' + `delta' * exp(`xb_hat')) - `c_hat'
 		quietly ivreg2 `y_tild' `indepvar' (`endog' = `instr')  if `touse' [`weight'`exp'] , `option' // ffirst saverf
