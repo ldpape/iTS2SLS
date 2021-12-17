@@ -36,7 +36,7 @@ program define i2SLS_ivreg2, eclass
 	
 	*** Initialisation de la boucle
 	tempvar y_tild 
-	gen `y_tild' = log(`depvar' + 1)
+	quietly gen `y_tild' = log(`depvar' + 1)
 	quietly ivreg2 `y_tild' `indepvar' (`endog' = `instr') [`weight'`exp'] if `touse', `option'
 	matrix beta_new = e(b)
 	local k = 0
@@ -47,18 +47,18 @@ program define i2SLS_ivreg2, eclass
 		matrix beta_initial = beta_new
 		* Nouveaux beta
 		tempvar xb_hat
-		predict `xb_hat', xb
+	quietly	predict `xb_hat', xb
 /* tempname cste_hat
 		scalar `cste_hat' = _b[_cons]
 		* Calcul de phi_hat
 		tempvar temp1
-		gen `temp1' = `depvar' * exp(-(`xb_hat' - `cste_hat'))
+	quietly	gen `temp1' = `depvar' * exp(-(`xb_hat' - `cste_hat'))
 		quietly sum `temp1' [`weight'`exp'] if e(sample)
 		tempname phi_hat
 		scalar `phi_hat' = log(`r(mean)')
 		* Calcul de c_hat
 		tempvar temp2
-		gen `temp2' = log(`depvar' + `delta'*exp(`phi_hat' + (`xb_hat' - `cste_hat'))) - (`phi_hat' + (`xb_hat' - `cste_hat'))
+	quietly	gen `temp2' = log(`depvar' + `delta'*exp(`phi_hat' + (`xb_hat' - `cste_hat'))) - (`phi_hat' + (`xb_hat' - `cste_hat'))
 		quietly sum `temp2' [`weight'`exp'] if e(sample)
 		tempname c_hat
 						scalar `c_hat' = `r(mean)' */
