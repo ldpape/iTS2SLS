@@ -1,5 +1,6 @@
 * 16/12 : change constant calculation to avoid a log of 0 & change eps.
-
+* 19/12 change covariance matrix calculation for large data set
+* 19/12 : add correction when no covariate is included.
 program define i2SLS_ivreg2, eclass
 	syntax [anything] [if]  [in] [aweight pweight fweight iweight]  [, DELta(real 1) gmm2s Robust CLuster(varlist numeric)]
 	marksample touse
@@ -28,6 +29,12 @@ program define i2SLS_ivreg2, eclass
     gettoken endog instr_temp : endog , p("=")
     gettoken equalsign instr_temp : instr_temp , p("=")
 	gettoken instr instr_temp : instr_temp, p(")")
+	
+	if "`indepvar'" =="" {
+	tempvar constant
+	quietly gen `constant' = 1 
+		local `indepvar' `constant' 
+	}
 	
 	*di `"`depvar'"'
 	*di `"`indepvar'"'
