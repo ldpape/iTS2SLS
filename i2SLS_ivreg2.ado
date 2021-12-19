@@ -111,11 +111,19 @@ program define i2SLS_ivreg2, eclass
 	mata : st_view(X,.,"`var_list'")
 	mata : st_view(Z,.,"`instr_list'")
 	mata : st_view(IW,.,"`ui_bis'")
-	mata : IW = diag(IW)
-	mata : Pz = Z*invsym(Z'*Z)*Z'
+	*mata : IW = diag(IW)
+	*mata : Pz = Z*invsym(Z'*Z)*Z'
+	
+	mata : W = (cross(X,Z)*invsym(cross(Z,Z))*cross(Z,X))
 	mata : Sigma_hat = st_matrix("Sigma")
-	mata : Sigma_0 = (X'*Pz*X)*Sigma_hat*(X'*Pz*X)
-	mata : invXpPzIWX = invsym(0.5*X'*(Pz*IW+IW*Pz)*X)
+	mata : Sigma_0 = W*Sigma_hat*W
+	*mata : Sigma_0 = (X'*Pz*X)*Sigma_hat*(X'*Pz*X)
+	*mata : IW = diag(IW)
+*	mata : invXpPzIWX = invsym(0.5*X'*(Pz:*IW'+IW:*Pz)*X)
+	mata : invXpPzIWX = invsym(0.5*cross(X,Z)*invsym(cross(Z,Z))*(Z':*IW')*X+ 0.5*X'*(IW:*Z)*invsym(cross(Z,Z))*cross(Z,X))
+	mata : Sigma_hat = st_matrix("Sigma")
+	*mata : Sigma_0 = (X'*Pz*X)*Sigma_hat*(X'*Pz*X)
+	*mata : invXpPzIWX = invsym(0.5*X'*(Pz*IW+IW*Pz)*X)
 	mata : Sigma_tild = invXpPzIWX*Sigma_0*invXpPzIWX
    mata: st_matrix("Sigma_tild", Sigma_tild) // used in practice
 	*** Stocker les rÃ©sultats dans une matrice
