@@ -72,7 +72,7 @@ program define i2SLS_ivreg2, eclass
 		* 2SLS 
 	mata: beta_new = invPzX*Z'*y_tilde
 		* DiffÃ©rence entre les anciens betas et les nouveaux betas
-	mata: criteria = mean(abs(beta_initial - beta_new))
+	mata: criteria = mean(abs(beta_initial - beta_new):^(2))
 mata: st_numscalar("eps", criteria)
 mata: st_local("eps", strofreal(criteria))
 mata: beta_initial = beta_new
