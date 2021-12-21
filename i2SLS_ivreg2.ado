@@ -3,7 +3,7 @@
 * 19/12 : add correction when no covariate is included.
 * 21/12 : Manual iteration of 2SLS GMM + options to control nb iterations /convergence..
 
-program define i2SLS_ivreg3, eclass
+program define i2SLS_ivreg2, eclass
 	syntax [anything] [if]  [in] [aweight pweight fweight iweight]  [, DELta(real 1) LIMit(real 0.00001) MAXimum(real 1000) Robust CLuster(varlist numeric)  ]
 	marksample touse
 	preserve 
