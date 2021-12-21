@@ -90,7 +90,7 @@ mata: beta_initial = beta_new
 	cap drop y_tild 
 	quietly mata: st_addvar("double", "y_tild")
 	mata: st_store(.,"y_tild",y_tilde)
-	quietly ivreg2 y_tild `r(varlist)' (`endog' = `instr') [`weight'`exp'] if `touse', `option'  gmm2s
+	quietly ivreg2 y_tild `r(varlist)' (`endog' = `instr') [`weight'`exp'] if `touse', `option'  
 	* Calcul de Sigma_0, de I-W, et de Sigma_tild
 	matrix beta_final = e(b) // 	mata: st_matrix("beta_final", beta_new)
 	matrix Sigma = e(V)
