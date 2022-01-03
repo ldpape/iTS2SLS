@@ -15,7 +15,7 @@
 {title:Title}
 
 {p2colset 5 18 20 2}{...}
-{p2col :{cmd:i2SLS_ivreg2} {hline 2}}Iterated Two Stage Least Squares (i2SLS) with delta {p_end}
+{p2col :{cmd:i2SLS_ivreg2} {hline 2}}Iterated Two Samples Two Stage Least Squares (i2SLS) with delta {p_end}
 {p2colreset}{...}
 
 {marker syntax}{...}
