@@ -1,6 +1,6 @@
 v 1
 d Louis Pape
-p iOLS_ivreg2 iOLS_ivreg2 - Run iOLS Procedure in Endogenous Case
+p iTS2SLS iTS2SLS - Two Sample Instrumental Variables with iOLS_delta
 
 * l word-to-show path-or-url [description]
 * t: Directories within site:
