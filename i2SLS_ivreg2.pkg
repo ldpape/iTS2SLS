@@ -1,7 +1,8 @@
 ********************************************** unique.pkg
 v 1
-d i2SLS_ivreg2 
-d Program to run small sample iOLS with instrumental variables (i2SLS)
+d iTS2SLS 
+d Program to Two Sample iOLS with instrumental variables (iTS2SLS)
 d Distribution-Date: 29 March 2021
-f i2SLS_ivreg2.ado
-f i2SLS_ivreg2.sthlp
+f iTS2SLS.ado
+f iTS2SLS_test.ado
+f iTS2SLS.sthlp
