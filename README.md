@@ -5,7 +5,7 @@ To install this code into Stata, run the following (requires at least Stata 14):
 
 >cap ado uninstall iTS2SLS
 
->net install iTS2SLS, from("https://raw.githubusercontent.com/ldpape/i2SLS/master/")
+>net install iTS2SLS, from("https://raw.githubusercontent.com/ldpape/iTS2SLS/master/")
 
 You will need to have the following packages installed using:
 >ssc install moremata
