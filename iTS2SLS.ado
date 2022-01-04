@@ -153,7 +153,9 @@ ereturn  scalar eps =   `eps'
 ereturn  scalar niter =  `k'
 ereturn local cmd "iTS2SLS"
 ereturn local vcetype `option'
+di in gr _col(55) "Number of obs = " in ye %8.0f e(N)
 ereturn display
+di "/!\ Standard Errors are Wrong and Need to be Boostrapped!"
 end
 
 /*
