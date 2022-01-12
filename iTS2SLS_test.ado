@@ -28,7 +28,7 @@ program define iTS2SLS_test, eclass
 		 
 		 cap drop xb_temp
          egen c_hat_temp = mean(temp)
-         logit dep_pos `indepvar' `instr'
+         xi: logit dep_pos `indepvar' `instr'
          predict p_hat_temp, pr
          gen lambda = (c_hat_temp-log(`delta'))/p_hat_temp
          * run the test
